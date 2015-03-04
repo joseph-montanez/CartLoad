@@ -20,7 +20,7 @@ module Money =
         | false -> None
     
     let GetDateEndPrice (endDate : DateTime, price: decimal<dollars>) =
-        match endDate <= DateTime.Now with
+        match endDate >= DateTime.Now with
         | true -> Some(price)
         | false -> None
     
