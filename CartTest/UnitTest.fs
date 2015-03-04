@@ -65,29 +65,31 @@ type UnitTest() =
         Assert.AreEqual(true, Product.CompareDates (DateTime(2014, 1, 15)) (DateTime(2014, 2, 20)))
     [<TestMethod>]
     member x.Product_GetPrice_Simple () =
-        let apple = new Product.Item(1, "Apple", "Shinny red apple", Product.OnePrice 0.5M)
+        let apple : Product.Item = { Id = 1; Name = "Apple"; Description = "Shinny red apple"; Price = Product.OnePrice 0.5M }
         Assert.AreEqual(Some(0.5M<Money.dollars>), Product.GetPrice (apple, 1))
     [<TestMethod>]
     member x.Product_GetPrice_Bulk () =
-        let apple = new Product.Item(1, "Apple", "Shinny red apple", 
-                                    Product.PriceTable.Many [
-                                        Product.PriceTypes.Bulk ({ Price = 0.5M<Money.dollars>; Start = Some(DateTime.Now); End = None; }, 1, -1)
-                                        Product.PriceTypes.Bulk ({ Price = 0.4M<Money.dollars>; Start = None; End = None; }, 2, 6)
-                                        Product.PriceTypes.Bulk ({ Price = 0.2M<Money.dollars>; Start = None; End = None; }, 7, 200)
-                                    ]
-        )
+        let apple : Product.Item = {
+            Id = 1
+            Name = "Apple"
+            Description = "Shinny red apple"
+            Price = Product.PriceTable.Many [
+                        Product.PriceTypes.Bulk ({ Price = 0.5M<Money.dollars>; Start = Some(DateTime.Now); End = None; }, 1, -1)
+                        Product.PriceTypes.Bulk ({ Price = 0.4M<Money.dollars>; Start = None; End = None; }, 2, 6)
+                        Product.PriceTypes.Bulk ({ Price = 0.2M<Money.dollars>; Start = None; End = None; }, 7, 200)]}
         Assert.AreEqual(Some(0.5M<Money.dollars>), Product.GetPrice (apple, 1))
         Assert.AreEqual(Some(0.4M<Money.dollars>), Product.GetPrice (apple, 2))
         Assert.AreEqual(Some(0.2M<Money.dollars>), Product.GetPrice (apple, 20))
     [<TestMethod>]
     member x.Product_GetPrice_Bulk_Expired () =
-        let apple = new Product.Item(1, "Apple", "Shinny red apple", 
-                                    Product.PriceTable.Many [
-                                        Product.PriceTypes.Bulk ({ Price = 0.5M<Money.dollars>; Start = Some(DateTime.Now); End = None; }, 1, -1)
-                                        Product.PriceTypes.Bulk ({ Price = 0.4M<Money.dollars>; Start = None; End = Some(DateTime(2014, 1, 1)); }, 2, 6)
-                                        Product.PriceTypes.Bulk ({ Price = 0.2M<Money.dollars>; Start = None; End = None; }, 7, 200)
-                                    ]
-        )
+        let apple : Product.Item = {
+            Id = 1
+            Name = "Apple"
+            Description = "Shinny red apple"
+            Price = Product.PriceTable.Many [
+                        Product.PriceTypes.Bulk ({ Price = 0.5M<Money.dollars>; Start = Some(DateTime.Now); End = None; }, 1, -1)
+                        Product.PriceTypes.Bulk ({ Price = 0.4M<Money.dollars>; Start = None; End = Some(DateTime(2014, 1, 1)); }, 2, 6)
+                        Product.PriceTypes.Bulk ({ Price = 0.2M<Money.dollars>; Start = None; End = None; }, 7, 200)]}
         Assert.AreEqual(Some(0.5M<Money.dollars>), Product.GetPrice (apple, 1))
-        Assert.AreEqual(Some(0.5M<Money.dollars>), Product.GetPrice (apple, 2))
+        Assert.AreEqual(Some(0.4M<Money.dollars>), Product.GetPrice (apple, 2))
         Assert.AreEqual(Some(0.2M<Money.dollars>), Product.GetPrice (apple, 20))

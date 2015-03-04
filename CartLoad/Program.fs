@@ -3,26 +3,21 @@
 open System
 open Shabb.Store
 
-type Book(id, name, description, price, pages) =
-    inherit Product.Item(id, name, description, price)
-
-    member x.Pages : int = pages
-
-
 [<EntryPoint>]
 let main argv =
 
     // Products
-    let apple, orange, two_cities =
-        new Product.Item(1, "Apple", "Shinny red apple", Product.OnePrice 0.5M),
-        new Product.Item(2, "Orange", "Juicy orange", Product.OnePrice 1.5M),
-        new Book(2, "Two Cities", "A tale of two Cities", Product.OnePrice 23.95M, 255)
+    let (apple : Product.Item), (orange : Product.Item), (two_cities : Product.Item) =
+        { Id = 1; Name = "Apple"; Description = "Shinny red apple"; Price = Product.OnePrice 0.5M },
+        { Id = 2; Name = "Orange"; Description = "Juicy orange"; Price = Product.OnePrice 1.5M },
+        { Id = 3; Name = "Two Cities"; Description = "A tale of two Cities"; Price = Product.OnePrice 23.95M }
+
 
     // Bag
     let items = [
         apple, 3
         orange, 1
-        two_cities :> Product.Item, 2
+        two_cities, 2
     ]
 
     let cart : Cart.Basket = { 
@@ -34,7 +29,7 @@ let main argv =
         Total = 0.00M<Money.dollars> 
     }
 
-    Cart.calcSubtotal cart |> Money.fromDollars |> printfn "%f"
+//    Cart.calcSubtotal cart |> Money.fromDollars |> printfn "%f"
 
     printfn "Press any key to continue"
     let ret = Console.Read()

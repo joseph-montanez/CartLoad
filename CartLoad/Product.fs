@@ -11,11 +11,12 @@ module Product =
         | One of PriceTypes
         | Many of list<PriceTypes>
 
-    type Item (id, name, description, price) =
-        member x.Id : int = id
-        member x.Name : string = name
-        member x.Description : string = description
-        member x.Price : PriceTable = price
+    type Item = {
+        Id : int
+        Name : string
+        Description : string
+        Price : PriceTable
+    }
 
     type ValidDatePrice = DateTime option * decimal<Money.dollars> * int * int
 
