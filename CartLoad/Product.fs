@@ -6,11 +6,16 @@ module Product =
     type PriceTypes =
         | Simple of Money.Price
         | Bulk of Money.Price * int * int
-
+        
     type PriceEffectTypes =
         | Replace
         | Amount
         | Percent
+
+    type SkuEffectTypes =
+        | Replace
+        | Before
+        | After
         
     type PriceTable =
         | One of PriceTypes
