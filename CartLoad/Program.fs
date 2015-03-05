@@ -29,7 +29,7 @@ let main argv =
         Total = 0.00M<Money.dollars> 
     }
 
-//    Cart.calcSubtotal cart |> Money.fromDollars |> printfn "%f"
+    Cart.calcSubtotal cart |> Money.fromDollars |> printfn "%f"
 
     printfn "Press any key to continue"
     let ret = Console.Read()
