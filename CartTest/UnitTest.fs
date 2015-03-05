@@ -91,5 +91,5 @@ type UnitTest() =
                         Product.PriceTypes.Bulk ({ Price = 0.4M<Money.dollars>; Start = None; End = Some(DateTime(2014, 1, 1)); }, 2, 6)
                         Product.PriceTypes.Bulk ({ Price = 0.2M<Money.dollars>; Start = None; End = None; }, 7, 200)]}
         Assert.AreEqual(Some(0.5M<Money.dollars>), Product.GetPrice (apple, 1))
-        Assert.AreEqual(Some(0.4M<Money.dollars>), Product.GetPrice (apple, 2))
+        Assert.AreEqual(Some(0.5M<Money.dollars>), Product.GetPrice (apple, 2))
         Assert.AreEqual(Some(0.2M<Money.dollars>), Product.GetPrice (apple, 20))
