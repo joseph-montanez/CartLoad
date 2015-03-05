@@ -7,10 +7,15 @@ module Product =
         | Simple of Money.Price
         | Bulk of Money.Price * int * int
 
+    type PriceEffectTypes =
+        | Replace
+        | Amount
+        | Percent
+        
     type PriceTable =
         | One of PriceTypes
         | Many of list<PriceTypes>
-
+        
     type Item = {
         Id : int
         Name : string
@@ -18,10 +23,36 @@ module Product =
         Price : PriceTable
     }
 
+    type ItemOption = {
+        Id : int
+        Name : string
+        PriceEffect : PriceEffectTypes
+        Price : PriceTable
+        SKU : string
+        Order : int
+    }
+
+    type ItemOptionSet = {
+        Id : int
+        ItemId : int
+        Name : string
+        Required : bool
+        Options : ItemOption[]
+        Order : int
+    }
+
+    type ItemCombination = {
+        Id : int
+        ItemId : int
+        Enabled : bool
+        Options : ItemOption[]
+        Order : int
+    }
+
     type ValidDatePrice = DateTime option * decimal<Money.dollars> * int * int
 
-    let SimplePrice price = PriceTypes.Simple <| Money.Simple price
-    let OnePrice price = PriceTable.One <| SimplePrice price
+    let SimplePrice = PriceTypes.Simple << Money.Simple
+    let OnePrice = PriceTable.One << SimplePrice
 
     /// Exclusive 'between' operator:
     let (><) x (min, max) =
@@ -38,16 +69,16 @@ module Product =
         | (None, Some(endDate)) -> itemEnd
         | (None, None) -> Some(DateTime.Now)
 
+    let GetPriceFromSimplePrice simplePrice =
+        match Money.GetPrice simplePrice with
+        | Some(money) -> (GetMinPriceDate (simplePrice.Start, simplePrice.End), simplePrice.Price, 1, 1)
+        | None -> (None, simplePrice.Price, 1, -1)
+
     let GetPriceFromPriceTable (priceItem : PriceTypes) = 
         match priceItem with
-        | Simple(simplePrice) -> 
-            let price = Money.GetPrice simplePrice
-            match price with
-            | Some(money) -> (GetMinPriceDate (simplePrice.Start, simplePrice.End), simplePrice.Price, 1, 1)
-            | None -> (None, simplePrice.Price, 1, -1)
+        | Simple(simplePrice) -> GetPriceFromSimplePrice simplePrice
         | Bulk(simplePrice, min, max) -> 
-            let price = Money.GetPrice simplePrice
-            match price with
+            match Money.GetPrice simplePrice with
             | Some(money) -> (GetMinPriceDate (simplePrice.Start, simplePrice.End), simplePrice.Price, min, max)
             | None -> (None, simplePrice.Price, min, max)
     
@@ -77,11 +108,11 @@ module Product =
     // Down the line this function will do a lot more then returning Item.Price
     let GetPrice (item : Item, qty : int) =
         match item.Price with
-        | One(priceItem) -> 
+        | One priceItem -> 
             match priceItem with
             | Simple(price) -> Money.GetPrice price
             | _ -> None
-        | Many(priceList) -> 
+        | Many priceList -> 
             let mappedPrices : list<ValidDatePrice> = List.map GetPriceFromPriceTable priceList
             let basePrice = None, 0.0M<Money.dollars>, 1, -1
             let reduced = List.fold (fun a b -> ComparePrices a b qty) basePrice mappedPrices
