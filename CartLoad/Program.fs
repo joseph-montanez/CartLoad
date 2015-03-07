@@ -8,9 +8,9 @@ let main argv =
 
     // Products
     let (apple : Product.Item), (orange : Product.Item), (two_cities : Product.Item) =
-        { Id = 1; Name = "Apple"; Description = "Shinny red apple"; Price = Product.OnePrice 0.5M },
-        { Id = 2; Name = "Orange"; Description = "Juicy orange"; Price = Product.OnePrice 1.5M },
-        { Id = 3; Name = "Two Cities"; Description = "A tale of two Cities"; Price = Product.OnePrice 23.95M }
+        Product.Simple 1u "Apple" "Shinny red apple" "apple" 0.5M,
+        Product.Simple 2u "Orange" "Juicy orange" "orange" 1.5M,
+        Product.Simple 3u "Two Cities" "A tale of two Cities" "two-cities" 23.95M
 
 
     // Bag

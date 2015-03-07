@@ -13,45 +13,29 @@ module Product =
         | Percent
 
     type SkuEffectTypes =
-        | Replace
-        | Before
-        | After
+        | ReplaceAll // Replace the entire sku
+        | StartOf // At the beginning of the sku
+        | EndOf // At the end of the sku
+        | Before // Before the previous sub-sku
+        | After // After the previous sub-sku
         
     type PriceTable =
         | One of PriceTypes
         | Many of list<PriceTypes>
-        
+
     type Item = {
-        Id : int
+        Id : uint32
         Name : string
         Description : string
+        Sku : string
         Price : PriceTable
     }
 
-    type ItemOption = {
-        Id : int
-        Name : string
-        PriceEffect : PriceEffectTypes
-        Price : PriceTable
-        SKU : string
-        Order : int
-    }
-
-    type ItemOptionSet = {
-        Id : int
-        ItemId : int
-        Name : string
-        Required : bool
-        Options : ItemOption[]
-        Order : int
-    }
-
-    type ItemCombination = {
-        Id : int
-        ItemId : int
-        Enabled : bool
-        Options : ItemOption[]
-        Order : int
+    type SkuCombination = {
+        Stack : (string * string) list
+        StartOfs : (string * string) list
+        EndOfs : (string * string) list
+        Replacements : (string * string) list
     }
 
     type ValidDatePrice = DateTime option * decimal<Money.dollars> * int * int
@@ -124,3 +108,6 @@ module Product =
             match reduced with
             | None, _, _, _ -> None
             | _, money, _, _ -> Some(money)
+
+    let Simple id name desc sku price =
+        { Id = id; Name = name; Description = desc; Sku = sku; Price = OnePrice price }

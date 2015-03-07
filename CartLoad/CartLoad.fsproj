@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Money.fs" />
     <Compile Include="Product.fs" />
+    <Compile Include="Option.fs" />
     <Compile Include="Cart.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />

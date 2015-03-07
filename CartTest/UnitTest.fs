@@ -61,8 +61,8 @@ let ``Product_CompareRange_Inside`` () =
     Product.CompareRange 1 4 4 |> should equal <| true
 [<Test>]
 let ``Product_CompareRange_Outside`` () = 
-    Product.CompareRange 1 4 5 |> should equal <| true
-    Product.CompareRange 1 4 0 |> should equal <| true
+    Product.CompareRange 1 4 5 |> should equal <| false
+    Product.CompareRange 1 4 0 |> should equal <| false
 
 [<Test>]
 let ``Product_CompareDates`` () = 
@@ -70,7 +70,7 @@ let ``Product_CompareDates`` () =
 
 [<Test>]
 let ``Product_GetPrice_Simple`` () =
-    let apple : Product.Item = { Id = 1; Name = "Apple"; Description = "Shinny red apple"; Price = Product.OnePrice 0.5M }
+    let apple : Product.Item = { Id = 1u; Name = "Apple"; Description = "Shinny red apple";  Sku = "apple"; Price = Product.OnePrice 0.5M }
     Product.GetPrice (apple, 1) |> should equal <| Some(0.5M<Money.dollars>)
     
 
@@ -82,9 +82,10 @@ let expiredBulkPricing =
 [<TestFixture>]
 type ``Given an expired bulk pricing setup, it should revert to the unlimited option`` ()=
     let apple : Product.Item = {
-        Id = 1
+        Id = 1u
         Name = "Apple"
         Description = "Shinny red apple"
+        Sku = "apple"
         Price = expiredBulkPricing }
         
     [<Test>] member x.
