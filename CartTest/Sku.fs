@@ -152,11 +152,12 @@ let ``when there is a blue small shirt and the small sku is prefixed it should b
 
 [<Test>]
 let ``when there is a blue small shirt and the small + blue sku is prefixed it should be b-s-tshirt`` () =
-    let colorBlueAmountBefore = {colorBlueAmountAfter with SkuEffect = Product.SkuEffectTypes.Before}
+    let colorBlueAmountStartOf = {colorBlueAmountAfter with SkuEffect = Product.SkuEffectTypes.StartOf}
+    let sizeSmallAmountStartOf = {sizeSmallAmountAfter with SkuEffect = Product.SkuEffectTypes.StartOf}
     let chosenOptions : Option.ItemChoice list = [
-                { Set = colorDetail; Option = colorBlueAmountBefore }
-                { Set = sizeDetail; Option = sizeSmallAmountBefore }
+                { Set = colorDetail; Option = colorBlueAmountStartOf }
+                { Set = sizeDetail; Option = sizeSmallAmountStartOf }
     ]
     let newBlueShirt = {blueSmallTshirt with Options = chosenOptions}
     let sku = Option.BuildSkuDefault tshirt.Sku newBlueShirt.Options
-    sku |> should equal <| "s-b-tshirt"
+    sku |> should equal <| "b-s-tshirt"
