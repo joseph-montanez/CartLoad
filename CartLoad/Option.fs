@@ -58,7 +58,9 @@ module Option =
         | Product.SkuEffectTypes.After -> {acc with Stack = List.append acc.Stack [(elem.Option.Sku, delimiter)]}
 
     let AddSkuStack (acc : string) (elem : (string * string)) = 
-        acc + snd elem + fst elem
+        match acc with
+        | "" -> fst elem
+        | _ -> acc + snd elem + fst elem
 
     let RenderSkuStack (skus : (string * string) list) = 
         List.fold AddSkuStack "" skus
