@@ -10,6 +10,7 @@ module Option =
         Name : string
         PriceEffect : Product.PriceEffectTypes
         Price : Product.PriceTable
+        SkuDelimiter : string option
         SkuEffect : Product.SkuEffectTypes
         Sku : string
         Order : sbyte
@@ -20,6 +21,7 @@ module Option =
         ItemId : uint32
         Name : string
         SkuDelimiter : string option
+        SkuEffect : Product.SkuEffectTypes
         Required : bool
         Order : sbyte
     }
