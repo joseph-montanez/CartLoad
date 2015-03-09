@@ -52,12 +52,19 @@ module Option =
         | _ -> None
 
     let JoinSku (delimiter : string) (acc : Product.SkuCombination) (elem : ItemChoice) = 
+        let modifiedDelimiter = match elem.Set.SkuDelimiter with
+                                | Some str -> str
+                                | None -> delimiter
+        let overrideModifiedDelimiter = match elem.Option.SkuDelimiter with
+                                        | Some str -> str
+                                        | None -> modifiedDelimiter
+
         match elem.Option.SkuEffect with
-        | Product.SkuEffectTypes.ReplaceAll -> {acc with Replacements = List.append acc.Replacements [(elem.Option.Sku, delimiter)]}
-        | Product.SkuEffectTypes.StartOf -> {acc with StartOfs = List.append acc.StartOfs [(elem.Option.Sku, delimiter)]}
-        | Product.SkuEffectTypes.EndOf -> {acc with EndOfs = List.append acc.EndOfs [(elem.Option.Sku, delimiter)]}
-        | Product.SkuEffectTypes.Before -> {acc with Stack = List.append [(elem.Option.Sku, delimiter)] acc.Stack}
-        | Product.SkuEffectTypes.After -> {acc with Stack = List.append acc.Stack [(elem.Option.Sku, delimiter)]}
+        | Product.SkuEffectTypes.ReplaceAll -> {acc with Replacements = List.append acc.Replacements [(elem.Option.Sku, overrideModifiedDelimiter)]}
+        | Product.SkuEffectTypes.StartOf -> {acc with StartOfs = List.append acc.StartOfs [(elem.Option.Sku, overrideModifiedDelimiter)]}
+        | Product.SkuEffectTypes.EndOf -> {acc with EndOfs = List.append acc.EndOfs [(elem.Option.Sku, overrideModifiedDelimiter)]}
+        | Product.SkuEffectTypes.Before -> {acc with Stack = List.append [(elem.Option.Sku, overrideModifiedDelimiter)] acc.Stack}
+        | Product.SkuEffectTypes.After -> {acc with Stack = List.append acc.Stack [(elem.Option.Sku, overrideModifiedDelimiter)]}
 
     let AddSkuStack (acc : string) (elem : (string * string)) = 
         match acc with
