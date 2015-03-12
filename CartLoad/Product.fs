@@ -38,7 +38,7 @@ module Product =
         Replacements : (string * string) list
     }
 
-    type ValidDatePrice = DateTime option * decimal<Money.dollars> * int * int
+    type ValidDatePrice = DateTime option * decimal * int * int
 
     let SimplePrice = PriceTypes.Simple << Money.Simple
     let OnePrice = PriceTable.One << SimplePrice
@@ -103,7 +103,7 @@ module Product =
             | _ -> None
         | Many priceList -> 
             let mappedPrices : list<ValidDatePrice> = List.map GetPriceFromPriceTable priceList
-            let basePrice = None, 0.0M<Money.dollars>, 1, -1
+            let basePrice = None, 0.0M, 1, -1
             let reduced = List.fold (fun a b -> ComparePrices a b qty) basePrice mappedPrices
             match reduced with
             | None, _, _, _ -> None

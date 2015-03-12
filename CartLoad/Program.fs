@@ -23,13 +23,13 @@ let main argv =
     let cart : Cart.Basket = { 
         Id = 1
         Items = items
-        Subtotal = 0.00M<Money.dollars>
-        Tax = 0.00M<Money.dollars>
-        Discount = 0.00M<Money.dollars>
-        Total = 0.00M<Money.dollars> 
+        Subtotal = 0.00M
+        Tax = 0.00M
+        Discount = 0.00M
+        Total = 0.00M
     }
 
-    Cart.calcSubtotal cart |> Money.fromDollars |> printfn "%f"
+    Cart.calcSubtotal cart |> printfn "%f"
 
     printfn "Press any key to continue"
     let ret = Console.Read()
