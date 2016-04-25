@@ -17,7 +17,7 @@ let appReferences  =
 
 // version info
 let version = "0.1"  // or retrieve from CI server
-let testDlls = !! (testDir + "/**/bin/**/Test.*.dll")
+let testDlls = !! ("build/Test.*.dll")
 
 // Targets
 Target "Clean" (fun _ ->
