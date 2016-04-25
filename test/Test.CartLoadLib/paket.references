@@ -1,0 +1,9 @@
+FsCheck
+FsUnit
+Fuchu
+Fuchu.FsCheck
+NUnit
+NUnit.Console
+NUnit.Runners
+NUnit.ConsoleRunner
+NUnitTestAdapter

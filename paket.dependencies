@@ -1,0 +1,11 @@
+source https://www.nuget.org/api/v2
+nuget FAKE
+nuget FsCheck
+nuget FsUnit
+nuget Fuchu
+nuget Fuchu.FsCheck
+nuget NUnit
+nuget NUnit.Console
+nuget NUnit.Runners
+nuget NUnitTestAdapter
+nuget NUnit.ConsoleRunner

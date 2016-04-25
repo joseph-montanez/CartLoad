@@ -1,16 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.30501.0
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CartLoad", "CartLoad\CartLoad.fsproj", "{B1C76C38-E9FB-40E8-AB65-36D5366706E8}"
+# Visual Studio 2012
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "CartLoad", "src\CartLoad\CartLoad.fsproj", "{B1C76C38-E9FB-40E8-AB65-36D5366706E8}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CartTest", "CartTest\CartTest.fsproj", "{983E6AFF-A0E7-4EAF-81B6-31E28E2DF7EA}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "CartLoadLib", "src\CartLoadLib\CartLoadLib.fsproj", "{E7DA1526-6100-44AF-89A2-137DAD89960A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BF02FB59-EE04-480C-B993-83146465E094}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Test.CartLoadLib", "test\Test.CartLoadLib\Test.CartLoadLib.fsproj", "{3482C152-A837-4901-9196-143C33F331F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,16 +13,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3482C152-A837-4901-9196-143C33F331F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3482C152-A837-4901-9196-143C33F331F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3482C152-A837-4901-9196-143C33F331F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3482C152-A837-4901-9196-143C33F331F3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B1C76C38-E9FB-40E8-AB65-36D5366706E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B1C76C38-E9FB-40E8-AB65-36D5366706E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1C76C38-E9FB-40E8-AB65-36D5366706E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1C76C38-E9FB-40E8-AB65-36D5366706E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{983E6AFF-A0E7-4EAF-81B6-31E28E2DF7EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{983E6AFF-A0E7-4EAF-81B6-31E28E2DF7EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{983E6AFF-A0E7-4EAF-81B6-31E28E2DF7EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{983E6AFF-A0E7-4EAF-81B6-31E28E2DF7EA}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
+		{E7DA1526-6100-44AF-89A2-137DAD89960A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7DA1526-6100-44AF-89A2-137DAD89960A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7DA1526-6100-44AF-89A2-137DAD89960A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7DA1526-6100-44AF-89A2-137DAD89960A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

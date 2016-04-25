@@ -1,0 +1,13 @@
+﻿<Properties StartupItem="src/CartLoad/CartLoad.fsproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="test/Test.CartLoadLib/UnitTest.fs">
+    <Files>
+      <File FileName="src/CartLoad/Program.fs" Line="7" Column="16" />
+      <File FileName="test/Test.CartLoadLib/UnitTest.fs" Line="4" Column="6" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
